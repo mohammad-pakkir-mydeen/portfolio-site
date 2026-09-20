@@ -100,7 +100,7 @@ function EngineeringCore({
         <meshBasicMaterial color={lighting.rim} wireframe transparent opacity={0.18} />
       </mesh>
       <Html center position={[0, -1.35, 0]} distanceFactor={6}>
-        <div className="pointer-events-none whitespace-nowrap rounded-md border border-accent-cyan/40 bg-base/90 px-2 py-1 font-mono text-[10px] tracking-[0.18em] text-accent-cyan">
+        <div className="pointer-events-none whitespace-nowrap rounded-md border border-accent-cyan/40 bg-canvas/90 px-2 py-1 font-mono text-[10px] tracking-[0.18em] text-accent-cyan">
           ENGINEERING CORE
         </div>
       </Html>
@@ -168,7 +168,7 @@ function StackNodes({
                 className={`whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[10px] transition-colors ${
                   selected
                     ? "border-accent-cyan/70 bg-accent-cyan/15 text-ink"
-                    : "border-panel-border bg-base/85 text-ink-muted hover:border-accent-indigo/70 hover:text-ink"
+                    : "border-panel-border bg-canvas/85 text-ink-muted hover:border-accent-indigo/70 hover:text-ink"
                 }`}
               >
                 {category.label}
@@ -192,7 +192,7 @@ export default function EngineeringStackScene({
   const reduced = useReducedMotion();
 
   return (
-    <div className="relative h-[430px] w-full overflow-hidden rounded-2xl border border-panel-border bg-base md:h-[520px]">
+    <div className="relative h-[430px] w-full overflow-hidden rounded-2xl border border-panel-border bg-canvas md:h-[520px]">
       <Canvas
         dpr={[1, isTouch ? 1.25 : 1.75]}
         gl={{ antialias: !isTouch, alpha: true, powerPreference: "high-performance" }}
@@ -221,7 +221,7 @@ export default function EngineeringStackScene({
             Drag to inspect the stack. Select a layer to trace its connections.
           </p>
         </div>
-        <span className="rounded-full border border-panel-border bg-base/70 px-2 py-1 font-mono text-[10px] text-ink-faint">
+        <span className="rounded-full border border-panel-border bg-canvas/70 px-2 py-1 font-mono text-[10px] text-ink-faint">
           {isTouch ? "TOUCH ENABLED" : "ORBIT ENABLED"}
         </span>
       </div>

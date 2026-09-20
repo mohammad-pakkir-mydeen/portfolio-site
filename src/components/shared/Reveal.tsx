@@ -14,6 +14,7 @@ export default function Reveal({ children, delay = 0, className, y = 18 }: Revea
   return (
     <motion.div
       className={className}
+      style={{ transformStyle: "preserve-3d" }}
       initial={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}

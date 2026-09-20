@@ -13,7 +13,7 @@ export default function SkillVisualization() {
   const reduced = useReducedMotion();
 
   return (
-    <div className="card-surface relative overflow-hidden p-6 md:p-8">
+    <div className="card-surface relative p-6 md:p-8">
       <span className="eyebrow">System view</span>
       <p className="mt-1 max-w-md text-xs text-ink-faint">
         A conceptual layering of the technical foundation — not a claim about one specific

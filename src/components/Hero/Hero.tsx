@@ -12,7 +12,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16"
+      className="relative flex min-h-[100svh] items-center overflow-visible pt-20 pb-12"
+      style={{ transformStyle: "preserve-3d" }}
     >
       <HeroBackground />
 

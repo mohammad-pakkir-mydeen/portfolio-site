@@ -1,46 +1,21 @@
 import { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { ContactShadows, OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
+import { ContactShadows, PerspectiveCamera } from "@react-three/drei";
 import epModel from "../../assets/models/ep.glb";
 import AvatarModel from "../shared/AvatarModel";
 import SceneLoader from "../shared/SceneLoader";
+import Scroll3DRig from "../shared/Scroll3DRig";
 import { useInView } from "../../hooks/useInView";
-import ThemeLights from "../shared/ThemeLights";
+import ThemeLights, { useThemeLighting } from "../shared/ThemeLights";
 
-function ProgressRig({
-  containerRef,
-  children,
-}: {
-  containerRef: React.RefObject<HTMLDivElement>;
-  children: React.ReactNode;
-}) {
-  const group = useRef<THREE.Group>(null);
-
-  useFrame(() => {
-    if (!group.current || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const vh = window.innerHeight;
-    // progress: 0 when section top hits bottom of viewport, 1 when it exits the top
-    const progress = THREE.MathUtils.clamp(
-      1 - (rect.top + rect.height * 0.5) / (vh * 0.9),
-      0,
-      1
-    );
-    const targetY = THREE.MathUtils.degToRad(-14) + progress * THREE.MathUtils.degToRad(14);
-    group.current.rotation.y += (targetY - group.current.rotation.y) * 0.06;
-  });
-
-  return <group ref={group}>{children}</group>;
-}
-
-export default function ExperienceAvatarScene() {
+export default function ExperienceAvatarScene({ activeSystem }: { activeSystem: string | null }) {
   const { ref: visRef, inView } = useInView<HTMLDivElement>({ threshold: 0.1 });
+  const lighting = useThemeLighting();
 
   return (
     <div
       ref={visRef}
-      className="relative h-[380px] sm:h-[460px] lg:h-[560px] w-full"
+      className="relative h-[380px] w-full sm:h-[460px] lg:h-[560px]"
       aria-hidden="true"
     >
       {inView && (
@@ -51,21 +26,26 @@ export default function ExperienceAvatarScene() {
           className="!absolute inset-0"
         >
           <PerspectiveCamera makeDefault fov={30} position={[0, 1.3, 6.2]} />
-          <OrbitControls
-            target={[0, 1.05, 0]}
-            enablePan={false}
-            enableZoom={false}
-            minPolarAngle={Math.PI / 2.4}
-            maxPolarAngle={Math.PI / 1.8}
-            rotateSpeed={0.65}
-          />
           <ThemeLights />
+          <pointLight
+            position={[-2.5, 2.2, -1.5]}
+            color={lighting.rim}
+            intensity={activeSystem ? 1.8 : 0.5}
+          />
 
-          <ProgressRig containerRef={visRef}>
+          <Scroll3DRig
+            containerRef={visRef}
+            rotationRange={[-0.45, 0.65]}
+            inertiaSpeed={4.5}
+            depthIntensity={0.24}
+            pitchIntensity={0.12}
+            mouseInfluence={0.1}
+            shiftX={activeSystem ? (activeSystem === "csm-portal" ? -0.08 : 0.08) : 0}
+          >
             <Suspense fallback={<SceneLoader />}>
               <AvatarModel url={epModel} targetHeight={2.55} idleBob={false} playAnimation />
             </Suspense>
-          </ProgressRig>
+          </Scroll3DRig>
 
           <ContactShadows position={[0, 0, 0]} opacity={0.5} scale={6} blur={2.4} far={3} />
         </Canvas>

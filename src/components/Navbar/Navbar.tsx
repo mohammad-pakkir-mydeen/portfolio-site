@@ -48,7 +48,7 @@ export default function Navbar({
         <nav
           className={`flex items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
             scrolled
-              ? "border border-panel-border bg-base/70 shadow-card backdrop-blur-md"
+              ? "border border-panel-border bg-canvas/70 shadow-card backdrop-blur-md"
               : "border border-transparent bg-transparent"
           }`}
           aria-label="Primary"
@@ -92,7 +92,7 @@ export default function Navbar({
           <div className="flex items-center gap-2">
             <div className="relative">
               <button
-                className="theme-switch flex items-center gap-2 border border-accent-indigo px-2 py-1.5 text-xs text-ink transition-colors hover:bg-accent-indigo hover:text-white"
+                className="theme-switch flex items-center gap-2 border border-accent-indigo px-2 py-1.5 text-xs text-ink transition-colors hover:bg-accent-indigo hover:text-canvas"
                 onClick={() => setThemeOpen((v) => !v)}
                 aria-label="Change visual environment"
                 aria-expanded={themeOpen}
@@ -162,12 +162,12 @@ export default function Navbar({
             transition={{ duration: 0.2 }}
             className="section-container mt-2 md:hidden"
           >
-            <div className="flex flex-col gap-1 rounded-2xl border border-panel-border bg-base/95 p-3 shadow-card backdrop-blur-md">
+            <div className="flex flex-col gap-1 rounded-2xl border border-panel-border bg-canvas/95 p-3 shadow-card backdrop-blur-md">
               {nav.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => go(item.id)}
-                  className={`rounded-xl px-4 py-3 text-left text-sm ${
+                                    className={`rounded-xl px-4 py-3 text-left text-sm ${
                     active === item.id ? "bg-panel-raised text-ink" : "text-ink-muted"
                   }`}
                 >

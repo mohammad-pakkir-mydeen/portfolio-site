@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: {
-          DEFAULT: "rgb(var(--base) / <alpha-value>)",
-          soft: "rgb(var(--base-soft) / <alpha-value>)",
+        canvas: {
+          DEFAULT: "rgb(var(--canvas) / <alpha-value>)",
+          soft: "rgb(var(--canvas-soft) / <alpha-value>)",
         },
         panel: {
           DEFAULT: "rgb(var(--panel) / <alpha-value>)",
@@ -24,6 +24,7 @@ export default {
           blue: "rgb(var(--accent) / <alpha-value>)",
           cyan: "rgb(var(--accent-cool) / <alpha-value>)",
         },
+        canvas: "rgb(var(--canvas) / <alpha-value>)",
       },
       fontFamily: {
         display: ["Manrope", "Inter", "system-ui", "sans-serif"],

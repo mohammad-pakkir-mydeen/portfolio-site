@@ -4,8 +4,8 @@
 
 :root {
   color-scheme: light;
-  --base: 255 253 250;
-  --base-soft: 248 245 241;
+  --canvas: 255 253 250;
+  --canvas-soft: 248 245 241;
   --panel: 255 255 255;
   --panel-raised: 250 246 242;
   --panel-border: 224 216 211;
@@ -14,14 +14,14 @@
   --ink-faint: 137 124 123;
   --accent: 180 35 47;
   --accent-soft: 137 27 39;
-  --accent-cool: 154 67 70;
+  --accent-cool: 141 31 40;
 }
 
 /* Themes change the operating environment, not just the page background. */
 [data-theme="paper"] {
   color-scheme: light;
-  --base: 242 237 226;
-  --base-soft: 249 245 236;
+  --canvas: 242 237 226;
+  --canvas-soft: 249 245 236;
   --panel: 255 252 244;
   --panel-raised: 247 241 229;
   --panel-border: 211 201 185;
@@ -30,12 +30,12 @@
   --ink-faint: 143 128 116;
   --accent: 164 78 61;
   --accent-soft: 126 55 47;
-  --accent-cool: 157 82 72;
+  --accent-cool: 142 58 47;
 }
 
 [data-theme="crimson"] {
-  --base: 250 245 243;
-  --base-soft: 244 235 234;
+  --canvas: 250 245 243;
+  --canvas-soft: 244 235 234;
   --panel: 255 250 249;
   --panel-raised: 248 238 239;
   --panel-border: 216 190 193;
@@ -44,12 +44,12 @@
   --ink-faint: 145 108 113;
   --accent: 143 24 40;
   --accent-soft: 105 18 31;
-  --accent-cool: 130 52 61;
+  --accent-cool: 118 26 39;
 }
 
 [data-theme="light"] {
-  --base: 255 255 255;
-  --base-soft: 250 250 250;
+  --canvas: 255 255 255;
+  --canvas-soft: 250 250 250;
   --panel: 255 255 255;
   --panel-raised: 247 247 247;
   --panel-border: 229 229 229;
@@ -58,16 +58,16 @@
   --ink-faint: 144 151 155;
   --accent: 194 50 61;
   --accent-soft: 151 29 39;
-  --accent-cool: 166 72 76;
+  --accent-cool: 154 36 44;
 }
 
 * {
-  scrollbar-color: rgb(var(--panel-border)) rgb(var(--base));
+  scrollbar-color: rgb(var(--panel-border)) rgb(var(--canvas));
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: rgb(var(--base));
+  background-color: rgb(var(--canvas));
   transition: background-color 220ms ease, color 220ms ease;
 }
 
@@ -86,7 +86,7 @@ html {
 }
 
 body {
-  @apply bg-base text-ink font-body antialiased;
+  @apply bg-canvas text-ink font-body antialiased;
   background-image:
     linear-gradient(rgb(var(--ink) / 0.018) 1px, transparent 1px),
     linear-gradient(90deg, rgb(var(--ink) / 0.018) 1px, transparent 1px),
@@ -155,37 +155,91 @@ body::after {
 
 .section-container {
   @apply mx-auto w-full max-w-content px-6 md:px-10;
+  transform-style: preserve-3d;
 }
 
 .eyebrow {
   @apply font-mono text-[13px] tracking-tight text-accent-indigo;
+  transform: translateZ(28px);
+  transform-style: preserve-3d;
+  display: block;
 }
 
 .h2 {
   @apply font-display text-3xl md:text-4xl font-semibold text-ink tracking-tight;
+  transform: translateZ(35px);
+  transform-style: preserve-3d;
 }
 
 .body-lead {
   @apply text-ink-muted text-base md:text-lg leading-relaxed;
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
 }
 
 .card-surface {
   @apply bg-panel border border-panel-border rounded-lg shadow-card;
-  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  /* No overflow:hidden here — it flattens preserve-3d and kills 3D depth on children */
+  transform: translateZ(55px);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-surface:hover {
+  transform: translateZ(80px) translateY(-3px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 32px 64px -20px rgba(0,0,0,0.28);
 }
 
 .btn-primary {
-  @apply inline-flex items-center gap-2 rounded-full bg-ink text-base px-6 py-3 font-medium text-sm
-  transition-all duration-300 hover:bg-accent-cyan hover:shadow-glow active:scale-[0.98];
+  @apply inline-flex items-center gap-2 rounded-full bg-ink text-canvas px-6 py-3 font-medium text-sm;
+  transform: translateZ(42px);
+  transform-style: preserve-3d;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover {
+  @apply bg-accent-cyan shadow-glow;
+  transform: translateZ(65px) scale(1.02);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center gap-2 rounded-md border border-panel-border bg-panel px-6 py-3 font-medium text-sm text-ink
-  transition-all duration-300 hover:border-accent-indigo/60 hover:bg-panel-raised active:scale-[0.98];
+  @apply inline-flex items-center gap-2 rounded-md border border-panel-border bg-panel px-6 py-3 font-medium text-sm text-ink;
+  transform: translateZ(36px);
+  transform-style: preserve-3d;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover {
+  @apply border-accent-indigo/60 bg-panel-raised;
+  transform: translateZ(58px) scale(1.02);
 }
 
 .tag-chip {
   @apply inline-flex items-center gap-1.5 rounded-full border border-panel-border bg-panel px-3 py-1 text-xs text-ink-muted;
+  transform: translateZ(22px);
+  transform-style: preserve-3d;
+}
+
+/* Spatial Z-depth utility classes for explicit hierarchy */
+.spatial-layer-base {
+  transform: translateZ(15px);
+  transform-style: preserve-3d;
+}
+
+.spatial-layer-mid {
+  transform: translateZ(48px);
+  transform-style: preserve-3d;
+}
+
+.spatial-layer-front {
+  transform: translateZ(75px);
+  transform-style: preserve-3d;
+}
+
+/* Sections must always propagate 3d to children */
+section {
+  transform-style: preserve-3d;
 }
 
 /* thin custom scrollbar for webkit */
@@ -193,7 +247,7 @@ body::after {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: rgb(var(--base));
+  background: rgb(var(--canvas));
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--accent) / 0.65);

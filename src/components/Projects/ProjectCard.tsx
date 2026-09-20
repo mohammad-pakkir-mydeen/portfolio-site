@@ -11,7 +11,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ title, description, flow, index }: ProjectCardProps) {
   return (
     <Reveal delay={index * 0.1}>
-      <div className="card-surface group relative overflow-hidden p-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent-indigo/40 md:p-9">
+      <div className="card-surface group relative p-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent-indigo/40 md:p-9">
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent-indigo/10 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
 
         <h3 className="relative font-display text-xl font-semibold text-ink md:text-2xl">

@@ -1,12 +1,13 @@
 import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
+import { SiLeetcode } from "react-icons/si";
 import { profile } from "../../data/portfolio";
 import Reveal from "../shared/Reveal";
 
 const links = [
   {
     key: "email",
-    href: profile.links.email ? `mailto:${profile.links.email}` : "",
-    label: profile.links.email,
+    href: profile.links.email,
+    label: "mohammadpakkirmydeen@gmail.com",
     icon: Mail,
   },
   {
@@ -21,14 +22,24 @@ const links = [
     label: "LinkedIn",
     icon: Linkedin,
   },
+  {
+    key: "leetcode",
+    href: profile.links.leetcode,
+    label: "LeetCode",
+    icon: SiLeetcode,
+  },
 ].filter((l) => l.href);
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-28 md:py-40">
+    <section
+      id="contact"
+      className="relative py-16 md:py-24"
+      style={{ transformStyle: "preserve-3d" }}
+    >
       <div className="section-container">
-        <Reveal className="card-surface relative overflow-hidden px-8 py-16 text-center md:px-16 md:py-24">
-          <div className="pointer-events-none absolute inset-0 bg-grid-fade" />
+        <Reveal className="card-surface relative px-8 py-16 text-center md:px-16 md:py-24">
+          <div className="pointer-events-none absolute inset-0 bg-grid-fade rounded-lg" />
 
           <div className="relative">
             <span className="eyebrow">07 · Contact</span>

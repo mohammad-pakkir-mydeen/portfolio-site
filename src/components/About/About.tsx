@@ -6,7 +6,11 @@ import SystemFlowDiagram from "./SystemFlowDiagram";
 
 export default function About() {
   return (
-    <section id="about" className="relative py-28 md:py-36">
+    <section
+      id="about"
+      className="relative py-16 md:py-24"
+      style={{ transformStyle: "preserve-3d" }}
+    >
       <div className="section-container">
         <SectionHeading
           eyebrow="01 · About"

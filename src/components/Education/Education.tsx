@@ -5,12 +5,16 @@ import Reveal from "../shared/Reveal";
 
 export default function Education() {
   return (
-    <section id="education" className="relative py-28 md:py-36">
+    <section
+      id="education"
+      className="relative py-16 md:py-24"
+      style={{ transformStyle: "preserve-3d" }}
+    >
       <div className="section-container">
         <SectionHeading eyebrow="05 · Education" title="Academic foundation." />
 
         <Reveal delay={0.1} className="mt-12">
-          <div className="card-surface relative overflow-hidden p-8 md:p-10">
+          <div className="card-surface relative p-8 md:p-10">
             <div className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full bg-accent-violet/10 blur-3xl" />
 
             <div className="relative flex flex-col gap-8 md:flex-row md:items-center md:justify-between">

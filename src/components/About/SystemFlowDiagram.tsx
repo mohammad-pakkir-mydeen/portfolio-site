@@ -12,7 +12,7 @@ export default function SystemFlowDiagram() {
   const reduced = useReducedMotion();
 
   return (
-    <div className="card-surface relative h-full min-h-[360px] overflow-hidden p-6">
+    <div className="card-surface relative h-full min-h-[360px] p-6">
       <span className="eyebrow">Conceptual view</span>
       <p className="mt-1 text-xs text-ink-faint">
         A generic illustration of how these layers relate — not a specific architecture.
